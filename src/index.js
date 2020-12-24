@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import App from './components/App';
+import PhotosListReducer from './redux/reducers/PhotosListReducer';
+import UploadedPhotosReducer from './redux/reducers/UploadedPhotosReducer';
+import config from './config/config';
+
+const rootReducer = combineReducers({
+    photos: PhotosListReducer,
+    uploadedPhotos: UploadedPhotosReducer,
+});
+
+const store = createStore(rootReducer);
+const {cloud_name, upload_preset} = config;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+        <App cloudName={cloud_name} uploadPreset={upload_preset}/>
+    </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
 );
