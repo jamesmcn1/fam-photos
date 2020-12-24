@@ -30,7 +30,7 @@ export const fetchPhotos = cloudName => {
         version: Math.ceil(new Date().getTime() / 1000),
     };
 
-    const urlPath = url('myphotoalbum', options);
+    const urlPath = url('samples', options);
 
     return fetch(urlPath)
         .then(res => res.text())

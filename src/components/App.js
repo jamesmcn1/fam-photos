@@ -1,59 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+// import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { CloudinaryContext, Image } from 'cloudinary-react';
+import { CloudinaryContext } from 'cloudinary-react';
+import NormalImageList from './NormalImageList';
 import { photosFetched } from '../redux/actions';
-import PhotoListContainer from './PhotoList';
-import PhotosUploaderContainer from './PhotosUploader';
 import { fetchPhotos } from '../utils/CloudinaryService';
 import './App.css';
+import config from '../config/config';
+
+const {cloud_name, upload_preset} = config;
 
 class App extends Component {
     componentDidMount() {
-        fetchPhotos(this.props.cloudName).then(this.props.onPhotosFetched);
+        fetchPhotos(cloud_name).then(this.props.onPhotosFetched);
     }
 
     render() {
+      console.log(this.props.photos);
+      const { photos = [] } = this.props;
+
         return (
+          <div className="App-main">
+            <h1>McNamara Photos</h1>
             <CloudinaryContext
-                cloudName={this.props.cloudName}
-                uploadPreset={this.props.uploadPreset}
+                cloudName={cloud_name}
+                uploadPreset={upload_preset}
             >
+
                 {/*This will render the image fetched from a remote HTTP URL using Cloudinary*/}
-                <Image
-                    publicId="https://cloudinary.com/images/logo.png"
-                    fetch-format="auto"
-                    quality="auto"
-                />
-                <BrowserRouter>
-                    <Switch className="router">
-                        <Route
-                            exact
-                            path="/photos"
-                            component={PhotoListContainer}
-                        />
-                        <Route
-                            exact
-                            path="/photos/new"
-                            component={PhotosUploaderContainer}
-                        />
-                        <Redirect from="/" to="/photos" />
-                    </Switch>
-                </BrowserRouter>
+                <NormalImageList photos={photos} />
             </CloudinaryContext>
+          </div>
         );
     }
 }
 
 App.propTypes = {
+    photos: PropTypes.array,
     cloudName: PropTypes.string,
     uploadPreset: PropTypes.string,
     onPhotosFetched: PropTypes.func,
 };
 
+
+
 const AppContainer = connect(
-    null,
+    state => ({ photos: state.photos }),
+
     { onPhotosFetched: photosFetched }
 )(App);
 

@@ -1,38 +1,21 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { ImageList, ImageListItem, ImageListItemBar  } from '@material-ui/core';
-import logo from '../yol.jpg';
+import { Image } from 'cloudinary-react';
+import PropTypes from 'prop-types';
 
-const itemData = [
-  {
-    img: logo,
-    title: 'yo',
-    author: 'yo',
-  },
-  {
-    img: logo,
-    title: 'yo',
-    author: 'yo',
-  },
-  {
-    img: logo,
-    title: 'yo',
-    author: 'yo',
-  },
-  {
-    img: logo,
-    title: 'yo',
-    author: 'yo',
-  },
-];
-function NormalImageList() {
-  return (
-    <ImageList>
-      {itemData.map((item) => (
+class NormalImageList extends Component {
+
+  render() {
+    return (
+      <ImageList>
+      {this.props.photos.map((item, i) => (
         <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?w=248&fit=crop&auto=format 1x,
-                ${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
+          <Image
+            publicId={item.public_id}
+            fetch-format="auto"
+            quality="auto"
+            width="500"
+            key={i}
           />
           <ImageListItemBar
             title={item.title}
@@ -40,8 +23,13 @@ function NormalImageList() {
           />
         </ImageListItem>
       ))}
-    </ImageList>
-  );
+      </ImageList>
+    );
+  }
 }
+
+NormalImageList.propTypes = {
+    photos: PropTypes.array,
+};
 
 export default NormalImageList;
