@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import GDImageViewer, { required_fields_object } from './components/GDImageViewer';
 import NormalImageList from './components/NormalImageList';
 import './components/GDImageViewer.css';
 
