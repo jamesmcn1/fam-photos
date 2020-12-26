@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageList, ImageListItem, ImageListItemBar  } from '@material-ui/core';
+import { ImageList, ImageListItem } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
 import PropTypes from 'prop-types';
 
