@@ -13,12 +13,14 @@ const {cloud_name, upload_preset} = config;
 
 class App extends Component {
     componentDidMount() {
-        fetchPhotos(cloud_name).then(this.props.onPhotosFetched);
+        fetchPhotos(cloud_name).then(x => {
+          this.props.onPhotosFetched(x.resources)
+        });
     }
 
     render() {
-      console.log(this.props.photos);
-      const { photos = [] } = this.props;
+      console.log('!!!!!! component', this.props.allPhotos);
+      const { allPhotos = [] } = this.props;
 
         return (
           <div className="App-main">
@@ -29,7 +31,7 @@ class App extends Component {
             >
 
                 {/*This will render the image fetched from a remote HTTP URL using Cloudinary*/}
-                <NormalImageList photos={photos} />
+                <NormalImageList photos={allPhotos} />
             </CloudinaryContext>
           </div>
         );
@@ -37,7 +39,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-    photos: PropTypes.array,
+    allPhotos: PropTypes.obj,
     cloudName: PropTypes.string,
     uploadPreset: PropTypes.string,
     onPhotosFetched: PropTypes.func,
@@ -46,7 +48,7 @@ App.propTypes = {
 
 
 const AppContainer = connect(
-    state => ({ photos: state.photos }),
+    state => ({ allPhotos: state.allPhotos }),
 
     { onPhotosFetched: photosFetched }
 )(App);

@@ -7,7 +7,7 @@ import {
 
 export const photosFetched = photos => ({
     type: PHOTOS_FETCHED,
-    photos: photos,
+    allPhotos: photos,
 });
 
 export const photosUploaded = photos => ({

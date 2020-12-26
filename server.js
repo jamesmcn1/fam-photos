@@ -18,15 +18,15 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.get('/api/images', async (req, res) => {
     console.log('Image API');
     const { resources } = await cloudinary.search
-        // .expression('folder:/*')
+        .expression('folder:family_photos/*')
         .sort_by('public_id', 'desc')
-        .max_results(100)
+        .max_results(50)
         .execute();
     console.log(resources);
-    const publicIds = resources.map((file) => file.public_id);
-    res.send(publicIds);
+    console.log('yoo');
+    res.send(resources);
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on PORT ${PORT}`);  
+  console.log(`Server listening on PORT ${PORT}`);
 });
