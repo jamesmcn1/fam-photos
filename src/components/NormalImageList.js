@@ -8,10 +8,10 @@ class NormalImageList extends Component {
   render() {
     return (
       <ImageList>
-      {this.props.photos.map((item, i) => (
+      {[1].map((item, i) => (
         <ImageListItem key={item.img}>
           <Image
-            publicId={item.public_id}
+            publicId="family_photos/blah/sample"
             fetch-format="auto"
             quality="auto"
             width="500"
