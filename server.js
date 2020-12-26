@@ -20,7 +20,7 @@ app.get('/api/images', async (req, res) => {
     const { resources } = await cloudinary.search
         .expression('folder:family_photos/*')
         .sort_by('public_id', 'desc')
-        // .max_results(50)
+        .max_results(400)
         .execute();
     console.log(resources);
     console.log('yoo');
