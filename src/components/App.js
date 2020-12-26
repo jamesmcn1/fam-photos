@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { CloudinaryContext } from 'cloudinary-react';
 import NormalImageList from './NormalImageList';
 import { photosFetched } from '../redux/actions';
+import { getPhotoState } from '../redux/selectors';
 import { fetchPhotos } from '../utils/CloudinaryService';
 import './App.css';
 import config from '../config/config';
@@ -19,9 +20,7 @@ class App extends Component {
     }
 
     render() {
-      console.log('!!!!!! component', this.props.allPhotos);
       const { allPhotos = [] } = this.props;
-
         return (
           <div className="App-main">
             <h1>McNamara Photos</h1>
@@ -29,8 +28,6 @@ class App extends Component {
                 cloudName={cloud_name}
                 uploadPreset={upload_preset}
             >
-
-                {/*This will render the image fetched from a remote HTTP URL using Cloudinary*/}
                 <NormalImageList photos={allPhotos} />
             </CloudinaryContext>
           </div>
@@ -45,11 +42,10 @@ App.propTypes = {
     onPhotosFetched: PropTypes.func,
 };
 
+const mapStateToProps = state => ({ allPhotos: getPhotoState(state, 'allPhotos') });
 
 
-const AppContainer = connect(
-    state => ({ allPhotos: state.allPhotos }),
-
+const AppContainer = connect(mapStateToProps,
     { onPhotosFetched: photosFetched }
 )(App);
 
