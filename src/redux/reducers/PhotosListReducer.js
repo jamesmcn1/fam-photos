@@ -16,8 +16,7 @@ const PhotosListReducer = (state = initialState, action) => {
         console.log(action);
             console.log(sortPhotos(action.allPhotos));
             return {...state,
-              allPhotos: action.allPhotos,
-
+              allPhotos: sortPhotos(action.allPhotos) || [],
             };
         default:
             return {...state};

@@ -19,11 +19,12 @@ app.get('/api/images', async (req, res) => {
     console.log('Image API');
     const { resources } = await cloudinary.search
         .expression('folder:family_photos/*')
+        .with_field('context')
+        .with_field('metadata')
         .sort_by('public_id', 'desc')
         .max_results(400)
         .execute();
     console.log(resources);
-    console.log('yoo');
     res.send(resources);
 });
 
