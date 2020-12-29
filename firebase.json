@@ -1,7 +1,6 @@
 {
   "hosting": {
-    "site": "mcnamara-fam-photos1",
-    "public": "public",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
