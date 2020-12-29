@@ -15,7 +15,6 @@ function NormalImageList(props) {
   }
 
   const getImageWidth = () => {
-    console.log('yo', width);
     if (isMobile) return width - 20;
     if (isTablet) return (width / 2) - 20;
     return (width / 3) - 20;

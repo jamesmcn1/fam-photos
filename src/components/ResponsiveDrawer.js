@@ -78,7 +78,7 @@ function ResponsiveDrawer(props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
           <Drawer
             className={classes.drawer}
             variant="permanent"
@@ -124,7 +124,6 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
   },
   closeMenuButton: {
     marginRight: 'auto',
