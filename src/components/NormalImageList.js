@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ImageList, ImageListItem } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
 import PropTypes from 'prop-types';
 import useWindowDimensions from '../hooks/useWindowDimensions';
-
+import { drawerWidth } from './ResponsiveDrawer';
 
 function NormalImageList(props) {
   const { width, isMobile, isTablet } = useWindowDimensions();
+
+  const containerRef = useRef(null);
 
   const getCols = () => {
     if (isMobile) return 1;
@@ -15,13 +17,17 @@ function NormalImageList(props) {
   }
 
   const getImageWidth = () => {
-    if (isMobile) return width - 20;
-    if (isTablet) return (width / 2) - 20;
-    return (width / 3) - 20;
+    const containerWidth = width - 20;
+    if (isMobile) return containerWidth;
+    if (isTablet) return Math.round((containerWidth - drawerWidth) / 2);
+    return Math.round((containerWidth - drawerWidth) / 3);
   }
 
+  const cols = getCols();
+  const imageWidth = getImageWidth();
+
   return (
-    <ImageList cols={getCols()}>
+    <ImageList cols={cols} ref={containerRef}>
     {props.photos.map((item, i) => (
       <ImageListItem key={i}>
         <Image
@@ -29,7 +35,7 @@ function NormalImageList(props) {
           fetch-format="auto"
           quality="auto"
           crop="scale"
-          width={getImageWidth()}
+          width={imageWidth}
           key={i}
         />
         {/*
