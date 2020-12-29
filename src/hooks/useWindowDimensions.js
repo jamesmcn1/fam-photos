@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+const MOBILE_BREAKPOINT = 768;
+const TABLET_BREAKPOINT = 1024;
+
 export default function useWindowDimensions() {
 
   const hasWindow = typeof window !== 'undefined';
@@ -10,6 +13,9 @@ export default function useWindowDimensions() {
     return {
       width,
       height,
+      isMobile: width < MOBILE_BREAKPOINT,
+      isTablet: width >= MOBILE_BREAKPOINT && width < TABLET_BREAKPOINT,
+      isDesktop: width >= TABLET_BREAKPOINT,
     };
   }
 
