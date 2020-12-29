@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { CloudinaryContext } from 'cloudinary-react';
 import NormalImageList from './NormalImageList';
+import ResponsiveDrawer from './ResponsiveDrawer';
 import { photosFetched } from '../redux/actions';
 import { getPhotoState } from '../redux/selectors';
 import { fetchPhotos } from '../utils/CloudinaryService';
@@ -23,12 +23,13 @@ class App extends Component {
       const { allPhotos = [] } = this.props;
         return (
           <div className="App-main">
-            <h1>McNamara Photos</h1>
             <CloudinaryContext
                 cloudName={cloud_name}
                 uploadPreset={upload_preset}
             >
+              <ResponsiveDrawer>
                 <NormalImageList photos={allPhotos} />
+              </ResponsiveDrawer>
             </CloudinaryContext>
           </div>
         );
