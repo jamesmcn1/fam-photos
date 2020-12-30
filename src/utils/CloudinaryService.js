@@ -17,6 +17,6 @@ export const openUploadWidget = (options, callback) => {
 
 export const fetchPhotos = () => {
     return fetch('/api/images')
-        .then(res => res.json())
+        .then(res => res.text())
         .then(res => ({ resources: res }));
 };

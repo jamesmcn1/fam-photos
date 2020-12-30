@@ -13,11 +13,11 @@ import config from '../config/config';
 const {cloud_name, upload_preset} = config;
 
 class App extends Component {
-    // componentDidMount() {
-    //     fetchPhotos(cloud_name).then(x => {
-    //       this.props.onPhotosFetched(x.resources)
-    //     });
-    // }
+    componentDidMount() {
+        fetchPhotos(cloud_name).then(x => {
+          this.props.onPhotosFetched(x.resources)
+        });
+    }
 
     render() {
       const { allPhotos = [] } = this.props;
