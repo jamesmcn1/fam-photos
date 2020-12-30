@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const express = require('express');
+const path = require('path');
 const app = express();
 
 const PORT = 8080;
@@ -11,6 +12,15 @@ cloudinary.config({
     api_key: 877256511567138,
     api_secret: 'K9vZ5Ms_1jBjxnr3xVVCq9G_voI',
 });
+
+// This middleware informs the express application to serve our compiled React files
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.get('*', function (req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
