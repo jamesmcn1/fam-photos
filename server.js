@@ -33,9 +33,9 @@ app.get('/api/images', async (req, res) => {
 
 
 // This middleware informs the express application to serve our compiled React files
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
-});
+// app.get('*', function (req, res) {
+//     res.sendFile(path.join(__dirname, './build', 'index.html'));
+// });
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);
