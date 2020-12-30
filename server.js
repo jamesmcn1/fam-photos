@@ -13,16 +13,6 @@ cloudinary.config({
     api_secret: 'K9vZ5Ms_1jBjxnr3xVVCq9G_voI',
 });
 
-// This middleware informs the express application to serve our compiled React files
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-  // app.use('/', express.static(path.join(__dirname, './build')));
-  app.use('/', express.static(__dirname + '/'));
-
-  // app.get('*', function (req, res) {
-  //     res.sendFile(path.join(__dirname, './build', 'index.html'));
-  // });
-}
-
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -38,6 +28,17 @@ app.get('/api/images', async (req, res) => {
     console.log(resources);
     res.send(resources);
 });
+
+
+// This middleware informs the express application to serve our compiled React files
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  // app.use('/', express.static(path.join(__dirname, './build')));
+  app.use('/', express.static(__dirname + '/'));
+
+  // app.get('*', function (req, res) {
+  //     res.sendFile(path.join(__dirname, './build', 'index.html'));
+  // });
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);
