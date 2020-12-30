@@ -7,6 +7,8 @@ import { drawerWidth } from './ResponsiveDrawer';
 
 function NormalImageList(props) {
   const { width, isMobile, isTablet } = useWindowDimensions();
+  const photos = props.photos || [];
+  console.log(props.photos);
 
   const containerRef = useRef(null);
 
@@ -28,7 +30,7 @@ function NormalImageList(props) {
 
   return (
     <ImageList cols={cols} ref={containerRef}>
-    {props.photos.map((item, i) => (
+    {photos.map((item, i) => (
       <ImageListItem key={i}>
         <Image
           publicId={item.public_id}

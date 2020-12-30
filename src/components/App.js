@@ -6,7 +6,7 @@ import NormalImageList from './NormalImageList';
 import ResponsiveDrawer from './ResponsiveDrawer';
 import { photosFetched } from '../redux/actions';
 import { getPhotoState } from '../redux/selectors';
-// import { fetchPhotos } from '../utils/CloudinaryService';
+import { fetchPhotos } from '../utils/CloudinaryService';
 import './App.css';
 import config from '../config/config';
 
