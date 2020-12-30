@@ -16,3 +16,4 @@ jobs:
           projectId: mcnamara-fam-photos
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+          NODE_ENV: staging

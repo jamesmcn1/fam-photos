@@ -1,6 +1,7 @@
 {
   "name": "fam-photos",
   "version": "1.0.0",
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
