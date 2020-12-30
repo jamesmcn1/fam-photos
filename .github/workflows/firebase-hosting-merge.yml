@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm i
-      - run: sudo npm i -g pm2 && sudo npm i -g serve
-      - run: npm run build && npm run deploy
+      - run: npm run build
+      - run: firebase deploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
