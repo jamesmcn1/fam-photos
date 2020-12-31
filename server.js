@@ -1,13 +1,14 @@
 const cloudinary = require('cloudinary').v2;
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 
 const PORT = 8080;
 
 console.log('Starting server');
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 cloudinary.config({
     cloud_name: 'nineteesvintage',
@@ -18,7 +19,7 @@ cloudinary.config({
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.get('/api/images', async (req, res) => {
+app.get('/api/images', cors(), async (req, res) => {
     console.log('Image API');
     const { resources } = await cloudinary.search
         .expression('folder:family_photos/*')
@@ -34,7 +35,7 @@ app.get('/api/images', async (req, res) => {
 
 // This middleware informs the express application to serve our compiled React files
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 app.listen(PORT, () => {
