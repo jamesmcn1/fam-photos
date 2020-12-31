@@ -2,6 +2,9 @@
   "name": "fam-photos",
   "version": "1.0.0",
   "homepage": ".",
+  "engines": {
+    "node": "12.0.0"
+  },
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
