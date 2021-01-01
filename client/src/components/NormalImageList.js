@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
-import { ImageList, ImageListItem } from '@material-ui/core';
+import ImageList from '@material-ui/core/ImageList';
+import ImageListItem from '@material-ui/core/ImageListItem';
+
 import { Image } from 'cloudinary-react';
 import PropTypes from 'prop-types';
 import useWindowDimensions from '../hooks/useWindowDimensions';
