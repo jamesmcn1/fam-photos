@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 8080;
 
 console.log('Starting server');
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 cloudinary.config({
     cloud_name: 'nineteesvintage',
@@ -34,9 +36,11 @@ app.get('/api/images', cors(), async (req, res) => {
 
 
 // This middleware informs the express application to serve our compiled React files
-app.get('*', function (req, res) {
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);

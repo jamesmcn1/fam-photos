@@ -8,8 +8,6 @@ import { drawerWidth } from './ResponsiveDrawer';
 function NormalImageList(props) {
   const { width, isMobile, isTablet } = useWindowDimensions();
   const photos = props.photos || [];
-  console.log(props.photos);
-
   const containerRef = useRef(null);
 
   const getCols = () => {
